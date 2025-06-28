@@ -6,6 +6,19 @@ import pickle as pk
 import os
 from tkinter import PhotoImage
 
+# pip install graphviz
+'''
+I want to add an extra element to editor that we can visualize the code what we have written. 
+    dot = graphviz.Digraph(comment='The Round Table')
+    dot.node('A', 'King Arthur')  # doctest: +NO_EXE
+    dot.node('B', 'Sir Bedevere the Wise')
+    dot.node('L', 'Sir Lancelot the Brave')
+    dot.render('flowchart', format='png')
+    img = Image.open("flowchart.png")
+    photo = ImageTk.PhotoImage(img)
+    label = tk.Label(root, image=photo)
+'''
+
 # Global values
 AUTH_FILEPATH = "./auth.data"
 BASH_FILEPATH = "./genrated/"
@@ -31,6 +44,17 @@ def is_user_already_loggedin():
             return last_logged_user, False 
 
     return None, False  
+
+
+
+class generate_graph(customtkinter.CTkToplevel):
+    def __init__(self, main_window, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.main_window = main_window  # Store reference to main window
+        self.geometry("400x300")
+        self.title("Graph")
+        self.iconbitmap("Assets/START.ico")
+    
 
 
 class CTkToolTip:
@@ -177,6 +201,10 @@ class Utility:
             self.code_area.insert("end", "exit\n")
             self.text_status(self.status_lbl) 
     
+    def show_graph(self): 
+        # print(text.strip().split("\n"))
+        generate_graph(text= self.code_area.get("1.0", customtkinter.END))
+        
 
 
 # Basic GUI setup
@@ -336,6 +364,11 @@ class App(customtkinter.CTk):
         self.clear_btn = customtkinter.CTkButton(self.main_frame2, fg_color="red", hover_color="dark red", 
                                                 command=self.util.clear_text,text="Clear")
         self.clear_btn.pack(side="bottom", padx=10, pady=10)
+
+        self.clear_btn = customtkinter.CTkButton(self.main_frame2, fg_color="orange", hover_color="dark orange", 
+                                                text_color = "black",command=self.util.show_graph,text="Show Graph")
+        self.clear_btn.pack(side="bottom", padx=10, pady=10)
+
 
         # Label at bottom of the whole UI
         self.last_frame = customtkinter.CTkFrame(self)
