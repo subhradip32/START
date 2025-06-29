@@ -6,19 +6,6 @@ import pickle as pk
 import os
 from tkinter import PhotoImage
 
-# pip install graphviz
-'''
-I want to add an extra element to editor that we can visualize the code what we have written. 
-    dot = graphviz.Digraph(comment='The Round Table')
-    dot.node('A', 'King Arthur')  # doctest: +NO_EXE
-    dot.node('B', 'Sir Bedevere the Wise')
-    dot.node('L', 'Sir Lancelot the Brave')
-    dot.render('flowchart', format='png')
-    img = Image.open("flowchart.png")
-    photo = ImageTk.PhotoImage(img)
-    label = tk.Label(root, image=photo)
-'''
-
 # Global values
 AUTH_FILEPATH = "./auth.data"
 BASH_FILEPATH = "./genrated/"
